@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 
 class WeatherScreen extends StatefulWidget {
-  WeatherScreen({@required this.cityName, @required this.temperature});
+  WeatherScreen(
+      {@required this.cityName,
+      @required this.temperature,
+      @required this.country});
 
   final cityName;
   final temperature;
-
+  final country;
   @override
   _WeatherScreenState createState() => _WeatherScreenState();
 }
@@ -39,7 +42,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 fontWeight: FontWeight.w400),
           ),
           Text(
-            '${widget.cityName}, India',
+            '${widget.cityName}, ${widget.country}',
             style: Theme.of(context).textTheme.bodyText2,
           ),
         ],

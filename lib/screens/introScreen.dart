@@ -14,7 +14,7 @@ class IntroScreen extends StatefulWidget {
 class _IntroScreenState extends State<IntroScreen> {
   var cityName;
   var temperature;
-
+  var country;
   void weatherdata() async {
     Location location = Location();
     await location.getlocation();
@@ -22,9 +22,11 @@ class _IntroScreenState extends State<IntroScreen> {
         '$kopenWeatherMapURL?lat=${location.lattitude}&lon=${location.longitude}&appid=$kapiKey&units=metric'));
     if (response.statusCode == 200) {
       String data = response.body;
-      cityName = jsonDecode(data)['name'];
-      double temp = jsonDecode(data)['main']['temp'];
+      var decodeddata = jsonDecode(data);
+      cityName = decodeddata['name'];
+      double temp = decodeddata['main']['temp'];
       temperature = temp.toInt();
+      country = decodeddata(data)['sys']['country'];
     } else {
       print(response.statusCode);
     }
@@ -35,6 +37,7 @@ class _IntroScreenState extends State<IntroScreen> {
       return WeatherScreen(
         cityName: cityName,
         temperature: temperature,
+        country: country,
       );
     }));
   }
